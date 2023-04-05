@@ -16,11 +16,17 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    phone: {
+        type: String,
+        required: true,
+        trim: true
+    },
     street: {
         type: String,
         required: true,
         trim: true
     },
+    landMark: String,
     city: {
         type: String,
         required: true,
@@ -33,4 +39,4 @@ const userSchema = new mongoose.Schema({
     }
 }, { timestamps: true })
 
-module.exports = mongoose.model('userPost', userSchema)
+module.exports = mongoose.model('user', userSchema)
