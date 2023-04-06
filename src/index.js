@@ -11,8 +11,8 @@ app.use(express.json());
 app.use(cors());
 app.use(multer().any())
 
-mongoose.connect("mongodb+srv://sandy_varanasi:sRzKkk5zN4u6uAZG@sandy-clusture.eimj9vg.mongodb.net/foodies",
-    { dbName: "foodies" },
+mongoose.connect("mongodb+srv://sandy_varanasi:sRzKkk5zN4u6uAZG@sandy-clusture.eimj9vg.mongodb.net/fsoc",
+    { dbName: "fsoc" },
     { useNewUrlParser: true })
     .then(() => console.log("MongoDb is connected"))
     .catch(err => console.log(err))

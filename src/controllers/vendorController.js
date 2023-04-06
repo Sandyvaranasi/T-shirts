@@ -6,6 +6,7 @@ const { uploadImage } = require("../midWare/aws.js");
 const joi = require("joi");
 
 // TODO: SHOP REGISTRATION ===>
+
 const createVendor = async function (req, res) {
   try {
     const data = req.body;
@@ -30,6 +31,7 @@ const createVendor = async function (req, res) {
           /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
         ),
       street: joi.string().required(),
+      landmark: joi.string(),
       city: joi.string().required(),
       pincode: joi.number().required(),
     });
@@ -41,7 +43,7 @@ const createVendor = async function (req, res) {
     if (error) {
       return res.status(400).send(error.details[0].message);
     }
-    //========================================================================================================================================================================================
+    //=====================================================================
 
     // password encryption ===>
     data.password = await bcrypt.hash(data.password, 12);
@@ -57,7 +59,7 @@ const createVendor = async function (req, res) {
       if (unique.phone == data.phone)
         return res.status(400).send({ message: "phone already in use" });
     }
-    //===================================================================================================================
+    //==========================================================================
 
     const createdUser = await shopModel.create(data);
     res.status(201).send({ message: "success", data: createdUser });
@@ -67,12 +69,11 @@ const createVendor = async function (req, res) {
 };
 
 // TODO: VENDOR LOG IN FEATURE ===>
+
 const vendorlogin = async function (req, res) {
   try {
-    let { email, password } = req.body;
-    if (Object.keys(req.body).length == 0) {
-      return res.status(400).send({ message: "Please send mandatory field" });
-    }
+    let data = req.body;
+
     //validation of email and password
     const userValidationSchema = joi.object({
       email: joi
@@ -95,10 +96,10 @@ const vendorlogin = async function (req, res) {
     if (error) {
       return res.status(400).send(error.details[0].message);
     }
-    //=========================================================================================================================================================================
+    //================================================================================
 
     // EXISTANCE CHECK ===>
-    let isShopExist = await shopModel.findOne({ email: email });
+    let isShopExist = await shopModel.findOne({ email: data.email });
     if (!isShopExist)
       return res
         .status(401)
@@ -106,14 +107,14 @@ const vendorlogin = async function (req, res) {
     //================================================================================================================
 
     // PASWORD MATCHING ===>
-    const matchPass = await bcrypt.compare(password, isShopExist.password);
+    const matchPass = await bcrypt.compare(data.password, isShopExist.password);
     if (!matchPass)
       return res.status(400).json({ message: "Password is wrong" });
     //===========================================================================================
 
-    const shopToken = jwt.sign({ userId: isShopExist._id }, "secretKey");
+    const shopToken = jwt.sign({ shopId: isShopExist._id }, "secretKey");
 
-    return res.status(200).send({
+    return res.send({
       message: "Success",
       data: {
         shopToken: shopToken,
@@ -126,6 +127,7 @@ const vendorlogin = async function (req, res) {
 };
 
 // TODO: T-SHIRT CREATION FEATURE ===>
+
 const createTshirt = async function (req, res) {
   try {
     const data = req.body;
@@ -138,9 +140,11 @@ const createTshirt = async function (req, res) {
       baseprice: joi.number().required().min(1),
       sizes: joi.string().required(),
       colors: joi.string(),
+      description: joi.string().required().min(10),
+      quantity: joi.number().required().min(1),
     });
     const { error, value } = userValidationSchema.validate(data, {
-      abortEarly: true,
+      abortEarly: false,
     });
 
     if (error) {
@@ -184,7 +188,7 @@ const createTshirt = async function (req, res) {
     } else {
       return res.status(400).send({ message: "Product Image is mandatory" });
     }
-    //======================================================================================================================================
+    //=============================================================================
 
     const tshirt = await tShirtModel.create(data);
 
@@ -194,7 +198,84 @@ const createTshirt = async function (req, res) {
   }
 };
 
+// TODO: UPDATE AVAILABILITY, PICTURE, PRICE, SIZE AND COLORS OF T-SHIRT ===>
 
-module.exports.createVendor = createVendor;
-module.exports.vendorlogin = vendorlogin;
-module.exports.createTshirt = createTshirt;
+const updateTshirt = async (req, res) => {
+  try {
+    const data = req.body;
+    const files = req.files;
+    const tShirtId = req.params.tShirttId;
+
+    if (Object.keys(data).length == 0)
+      return res.status(400).json({ message: "give some data to update" });
+
+    // VALIDATIONS ===>
+
+    const userValidationSchema = joi.object({
+      baseprice: joi.number().min(1),
+      sizes: joi.string(),
+      colors: joi.string(),
+      availability: joi.boolean(),
+    });
+    const { error, value } = userValidationSchema.validate(data, {
+      abortEarly: true,
+    });
+
+    if (error) {
+      return res.status(400).send(error.details[0].message);
+    }
+    //=======================================================================
+
+    // AUTHORISATION AND REF ADDING ==>
+
+    if (!req.shopId)
+      return res
+        .status(403)
+        .send({ message: "please register your shop first" });
+
+    //============================================================================================
+
+    // Changing Sizes and Colors to array ===>
+    if (data.sizes) {
+      let str = "";
+      for (let i of data.sizes) {
+        if (i != " ") str += i;
+      }
+      data.sizes = str.split(",");
+    }
+
+    if (data.colors) {
+      let color = "";
+      for (let i of data.colors) {
+        if (i != " ") color += i;
+      }
+      data.colors = color.split(",");
+    }
+
+    //===========================================================================
+
+    // ADDING IMAGE TO AWS ===>
+
+    if (files && files.length > 0) {
+      if (files.length > 1)
+        return res.status(400).send({ message: "only one file required" });
+      if (!/\.(gif|jpe?g|tiff?|png|webp|bmp)$/.test(files[0]["originalname"]))
+        return res.status(400).send({ message: "invalid file format" });
+
+      let imageUrl = await uploadImage(files[0]);
+      data.productImage = imageUrl;
+    }
+    //======================================================================================================
+    const tshirt = await tShirtModel.findOneAndUpdate(
+      { _id: tShirtId, shopId: req.shopId },
+      data,
+      { new: true }
+    );
+
+    return res.send({ data: tshirt });
+  } catch (error) {
+    return res.status(500).send({ satus: false, err: err.message });
+  }
+};
+
+module.exports = { createVendor, vendorlogin, createTshirt, updateTshirt };
