@@ -41,7 +41,7 @@ const createVendor = async function (req, res) {
     });
 
     if (error) {
-      return res.status(400).send(error.details[0].message);
+      return res.status(400).json(error.details[0].message);
     }
     //=====================================================================
 
@@ -55,16 +55,16 @@ const createVendor = async function (req, res) {
     });
     if (unique) {
       if (unique.email == data.email)
-        return res.status(400).send({ message: "email already in use" });
+        return res.status(400).json({ message: "email already in use" });
       if (unique.phone == data.phone)
-        return res.status(400).send({ message: "phone already in use" });
+        return res.status(400).json({ message: "phone already in use" });
     }
     //==========================================================================
 
     const createdUser = await shopModel.create(data);
-    res.status(201).send({ message: "success", data: createdUser });
+    res.status(201).json({ message: "success", data: createdUser });
   } catch (error) {
-    res.status(500).send({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -94,7 +94,7 @@ const vendorlogin = async function (req, res) {
     });
 
     if (error) {
-      return res.status(400).send(error.details[0].message);
+      return res.status(400).json(error.details[0].message);
     }
     //================================================================================
 
@@ -103,7 +103,7 @@ const vendorlogin = async function (req, res) {
     if (!isShopExist)
       return res
         .status(401)
-        .send({ message: "Email Id and password are incorrect" });
+        .json({ message: "Email Id and password are incorrect" });
     //================================================================================================================
 
     // PASWORD MATCHING ===>
@@ -112,9 +112,9 @@ const vendorlogin = async function (req, res) {
       return res.status(400).json({ message: "Password is wrong" });
     //===========================================================================================
 
-    const shopToken = jwt.sign({ shopId: isShopExist._id }, "secretKey");
+    const shopToken = jwt.sign({ userId: isShopExist._id }, "secretKey");
 
-    return res.send({
+    return res.json({
       message: "Success",
       data: {
         shopToken: shopToken,
@@ -122,7 +122,7 @@ const vendorlogin = async function (req, res) {
       },
     });
   } catch (error) {
-    res.status(500).send({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -148,14 +148,14 @@ const createTshirt = async function (req, res) {
     });
 
     if (error) {
-      return res.status(400).send(error.details[0].message);
+      return res.status(400).json(error.details[0].message);
     }
 
     // AUTHORISATION AND REF ADDING ==>
     if (!req.shopId)
       return res
         .status(403)
-        .send({ message: "please register your shop first" });
+        .json({ message: "please register your shop first" });
     data.shopId = req.shopId;
     //============================================================================================
 
@@ -179,22 +179,22 @@ const createTshirt = async function (req, res) {
 
     if (files && files.length > 0) {
       if (files.length > 1)
-        return res.status(400).send({ message: "only one file required" });
+        return res.status(400).json({ message: "only one file required" });
       if (!/\.(gif|jpe?g|tiff?|png|webp|bmp)$/.test(files[0]["originalname"]))
-        return res.status(400).send({ message: "invalid file format" });
+        return res.status(400).json({ message: "invalid file format" });
 
       let imageUrl = await uploadImage(files[0]);
       data.productImage = imageUrl;
     } else {
-      return res.status(400).send({ message: "Product Image is mandatory" });
+      return res.status(400).json({ message: "Product Image is mandatory" });
     }
     //=============================================================================
 
     const tshirt = await tShirtModel.create(data);
 
-    return res.status(201).send({ data: tshirt });
+    return res.status(201).json({ data: tshirt });
   } catch (error) {
-    res.status(500).send({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -222,7 +222,7 @@ const updateTshirt = async (req, res) => {
     });
 
     if (error) {
-      return res.status(400).send(error.details[0].message);
+      return res.status(400).json(error.details[0].message);
     }
     //=======================================================================
 
@@ -231,7 +231,7 @@ const updateTshirt = async (req, res) => {
     if (!req.shopId)
       return res
         .status(403)
-        .send({ message: "please register your shop first" });
+        .json({ message: "please register your shop first" });
 
     //============================================================================================
 
@@ -258,9 +258,9 @@ const updateTshirt = async (req, res) => {
 
     if (files && files.length > 0) {
       if (files.length > 1)
-        return res.status(400).send({ message: "only one file required" });
+        return res.status(400).json({ message: "only one file required" });
       if (!/\.(gif|jpe?g|tiff?|png|webp|bmp)$/.test(files[0]["originalname"]))
-        return res.status(400).send({ message: "invalid file format" });
+        return res.status(400).json({ message: "invalid file format" });
 
       let imageUrl = await uploadImage(files[0]);
       data.productImage = imageUrl;
@@ -272,10 +272,38 @@ const updateTshirt = async (req, res) => {
       { new: true }
     );
 
-    return res.send({ data: tshirt });
+    return res.json({ data: tshirt });
   } catch (error) {
-    return res.status(500).send({ satus: false, err: err.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
-module.exports = { createVendor, vendorlogin, createTshirt, updateTshirt };
+// TODO: GET SHOP DETAILS
+const getShopDetails = async (req, res) => {
+  try {
+    // AUTHORISATION AND REF ADDING ==>
+
+    if (!req.shopId)
+      return res
+        .status(403)
+        .json({ message: "please register your shop first" });
+
+    //============================================================================================
+
+    let details = await shopModel.findById(req.shopId).select({__v:0,password:0});
+    if (!details)
+      return res.status(404).json({ message: "No such shops found" });
+
+    return res.json({ data: details });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = {
+  createVendor,
+  vendorlogin,
+  createTshirt,
+  updateTshirt,
+  getShopDetails,
+};

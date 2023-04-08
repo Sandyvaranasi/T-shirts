@@ -6,47 +6,48 @@ const vendorController = require("../controllers/vendorController");
 const tShirtController = require("../controllers/tShirtController");
 const orderController = require("../controllers/orderController");
 
-router.post("/signup", userControllers.createUser);
-router.post("/login", userControllers.login);
+//* USER FEATURE ===>
+router.post("/api/signup", userControllers.createUser);
+router.post("/api/login", userControllers.login);
 
-router.post("/createShop", vendorController.createVendor);
-router.post("/vendorLogin", vendorController.vendorlogin);
-router.post(
-  "/createProduct",
-  midware.vendorAuth,
-  vendorController.createTshirt
-);
+//* SHOP FEATURE ===>
+router.post("/api/shop", vendorController.createVendor);
+router.post("/api/vendor", vendorController.vendorlogin);
+router.post("/api/product", midware.vendorAuth, vendorController.createTshirt);
 router.put(
-  "/tShirt/:tShirttId",
+  "/api/product/:tShirttId",
   midware.vendorAuth,
   vendorController.updateTshirt
 );
+router.get("/api/shop", midware.vendorAuth, vendorController.getShopDetails);
 
-router.get("/tShirt", tShirtController.getTshirt);
-router.get("/tShirt/:productId", tShirtController.getTshirtById);
+//* PRODUCT FEATURE ===>
+router.get("/api/product", tShirtController.getTshirt);
+router.get("/api/product/:productId", tShirtController.getTshirtById);
 router.get(
-  "/tShirtByShop",
+  "/api/tShirtByShop",
   midware.vendorAuth,
   tShirtController.getTshirtOfVendor
 );
 
+//* ORDER FEATURE ===>
 router.post(
-  "/order/:productId",
+  "/api/order/:productId",
   midware.authentication,
   orderController.createOrder
 );
 router.get(
-  "order",
+  "/api/order",
   midware.authentication,
   orderController.getOrdersOfCustomer
 );
 router.get(
-  "order/:orderId",
+  "/api/order/:orderId",
   midware.authentication,
   orderController.orderDetails
 );
 router.put(
-  "order/:orderId",
+  "/api/order/:orderId",
   midware.authentication,
   orderController.cancleOrder
 );
