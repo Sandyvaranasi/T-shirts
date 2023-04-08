@@ -55,9 +55,7 @@ const createUser = async function (req, res) {
           .status(400)
           .send({ status: false, message: "email already in use" });
       if (unique.phone == data.phone)
-        return res
-          .status(400)
-          .send({message: "phone already in use" });
+        return res.status(400).send({ message: "phone already in use" });
     }
     //=================================================================================================================
 
@@ -66,7 +64,7 @@ const createUser = async function (req, res) {
       .status(201)
       .send({ status: true, message: "success", data: createdUser });
   } catch (error) {
-    res.status(500).send({message: error.message });
+    res.status(500).send({ message: error.message });
   }
 };
 
@@ -104,7 +102,7 @@ const login = async function (req, res) {
     if (!isUserExist)
       return res
         .status(401)
-        .send({message: "Email Id or password is incorrect" });
+        .send({ message: "Email Id or password is incorrect" });
     //========================================================================================================================
 
     // PASSWORD MATCHING ===>
@@ -112,7 +110,7 @@ const login = async function (req, res) {
     if (!matchPass)
       return res
         .status(400)
-        .json({message: "Email Id or password is incorrect" });
+        .json({ message: "Email Id or password is incorrect" });
     //========================================================================================================================
 
     const userToken = jwt.sign({ userId: isUserExist._id }, "secretKey", {
@@ -128,7 +126,7 @@ const login = async function (req, res) {
       },
     });
   } catch (error) {
-    res.status(500).send({message: error.message });
+    res.status(500).send({ message: error.message });
   }
 };
 

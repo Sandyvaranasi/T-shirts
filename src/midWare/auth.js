@@ -12,7 +12,7 @@ const authentication = async (req, res, next) => {
       if (decodedToken) {
         req.userId = decodedToken.userId;
         next();
-      } else return res.status(401).json({message:error.message});
+      } else return res.status(401).json({ message: error.message });
     });
   } catch (err) {
     return res.status(500).json({ message: err.message });

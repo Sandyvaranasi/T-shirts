@@ -290,7 +290,9 @@ const getShopDetails = async (req, res) => {
 
     //============================================================================================
 
-    let details = await shopModel.findById(req.shopId).select({__v:0,password:0});
+    let details = await shopModel
+      .findById(req.shopId)
+      .select({ __v: 0, password: 0 });
     if (!details)
       return res.status(404).json({ message: "No such shops found" });
 
