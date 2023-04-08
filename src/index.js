@@ -5,13 +5,14 @@ const app = express();
 const cors = require('cors');
 const multer = require('multer')
 mongoose.set({ strictQuery: true });
+require('dotenv').config();
 
 app.use(express.json());
 
 app.use(cors());
 app.use(multer().any())
 
-mongoose.connect("mongodb+srv://sandy_varanasi:sRzKkk5zN4u6uAZG@sandy-clusture.eimj9vg.mongodb.net/fsoc",
+mongoose.connect(process.env.connectionString,
     { dbName: "fsoc" },
     { useNewUrlParser: true })
     .then(() => console.log("MongoDb is connected"))
@@ -20,9 +21,6 @@ mongoose.connect("mongodb+srv://sandy_varanasi:sRzKkk5zN4u6uAZG@sandy-clusture.e
 app.use('/', route)
 
 
-app.listen(3000, function () {
-    console.log('Express app running on port ' + 3000)
+app.listen(process.env.port||3000, function () {
+    console.log('Express app running on port ' + process.env.port||3000)
 });
-
-
-//   /api/vendors/vendorId/products    (only)

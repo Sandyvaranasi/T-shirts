@@ -19,7 +19,7 @@ router.put(
   midware.vendorAuth,
   vendorController.updateTshirt
 );
-router.get("/api/shop", midware.vendorAuth, vendorController.getShopDetails);
+router.get("/api/shop/:shopId", vendorController.getShopDetails);                                                           
 
 //* PRODUCT FEATURE ===>
 router.get("/api/product", tShirtController.getTshirt);

@@ -33,7 +33,7 @@ const createUser = async function (req, res) {
     });
 
     const { error, value } = userValidationSchema.validate(data, {
-      abortEarly: true,
+      abortEarly: false,
     });
 
     if (error) {
