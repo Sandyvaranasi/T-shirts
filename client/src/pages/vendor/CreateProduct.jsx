@@ -1,8 +1,11 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { api } from "../../api";
 
 export default function CreateProduct() {
+  const navigate = useNavigate();
+
   function createProduct(event) {
     event.preventDefault();
     const formData = new FormData(event.target);

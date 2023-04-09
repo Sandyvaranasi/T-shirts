@@ -12,6 +12,10 @@ export default function Store() {
     });
   }, []);
 
+  useEffect(() => {
+    console.log("Data Changed");
+  }, [tshirts]);
+
   console.log(tshirts);
 
   return (
