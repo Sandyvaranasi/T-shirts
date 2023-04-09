@@ -12,7 +12,11 @@ export default function TshirtPage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/t-shirts/${params.id}`)
+      .get(`http://localhost:3000/api/t-shirts/${params.id}`, {
+        headers: {
+          Authorization: "",
+        },
+      })
       .then((response) => {
         const t = response.data.data;
         setTShirt(t);

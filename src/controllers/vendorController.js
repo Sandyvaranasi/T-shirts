@@ -112,14 +112,14 @@ const vendorlogin = async function (req, res) {
       return res.status(400).json({ message: "Password is wrong" });
     //===========================================================================================
 
-    const shopToken = jwt.sign({ userId: isShopExist._id }, "secretKey");
+    const token = jwt.sign(
+      { userId: isShopExist._id, type: "vendor" },
+      "secretKey"
+    );
 
     return res.json({
-      message: "Success",
-      data: {
-        shopToken: shopToken,
-        userId: isShopExist._id,
-      },
+      message: "Login Success",
+      token,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -132,6 +132,8 @@ const createTshirt = async function (req, res) {
   try {
     const data = req.body;
     const files = req.files;
+
+    console.log(data);
 
     // VALIDATIONS ===>
 
@@ -148,7 +150,7 @@ const createTshirt = async function (req, res) {
     });
 
     if (error) {
-      return res.status(400).json(error.details[0].message);
+      return res.status(400).json(error.details);
     }
 
     // AUTHORISATION AND REF ADDING ==>

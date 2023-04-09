@@ -93,7 +93,7 @@ const login = async function (req, res) {
     });
 
     if (error) {
-      return res.status(400).send(error.details[0].message);
+      return res.status(400).send(error.details);
     }
     //==========================================================================================================================================================================
 
@@ -113,17 +113,13 @@ const login = async function (req, res) {
         .json({ message: "Email Id or password is incorrect" });
     //========================================================================================================================
 
-    const userToken = jwt.sign({ userId: isUserExist._id }, "secretKey", {
+    const token = jwt.sign({ userId: isUserExist._id }, "secretKey", {
       expiresIn: 3600 * 24,
     });
 
     return res.status(200).send({
-      status: true,
-      message: "Success",
-      data: {
-        userToken: userToken,
-        userId: isUserExist._id,
-      },
+      token,
+      message: "Login Success",
     });
   } catch (error) {
     res.status(500).send({ message: error.message });

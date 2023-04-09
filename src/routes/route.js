@@ -6,8 +6,8 @@ const tShirtController = require("../controllers/tShirtController");
 const orderController = require("../controllers/orderController");
 
 //* SHOP FEATURE ===>
-router.post("/shop", vendorController.createVendor);
-router.post("/vendor", vendorController.vendorlogin);
+router.post("/vendor/register", vendorController.createVendor);
+router.post("/vendor/login", vendorController.vendorlogin);
 router.post("/product", midware.vendorAuth, vendorController.createTshirt);
 router.put(
   "/product/:tShirttId",
