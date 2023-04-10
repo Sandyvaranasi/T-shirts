@@ -7,6 +7,7 @@ const authentication = async (req, res, next) => {
     if (!token) return res.status(401).json({ message: "Login first" });
 
     token = token.split(" ")[1];
+    console.log(token);
 
     await jwt.verify(token, "secretKey", (error, decodedToken) => {
       if (decodedToken) {

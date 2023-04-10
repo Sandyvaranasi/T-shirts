@@ -130,5 +130,19 @@ const login = async function (req, res) {
   }
 };
 
-module.exports.createUser = createUser;
-module.exports.login = login;
+// TODO: GET USER
+const getUser = async (req,res)=>{
+  try{
+    
+    // Authorization
+    if(!req.userId) return res.status(403).json({message:'You are unauthororized for this action'})
+    //==============================================================================================
+
+    const user = await userModel.findById(req.userId)
+    return res.json({data:user})
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+}
+
+module.exports = {createUser, login, getUser};

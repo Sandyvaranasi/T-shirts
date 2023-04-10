@@ -18,11 +18,3 @@ const validatePhone = function (a) {
 const isValidImage = function (value) {
   return /\.(gif|jpe?g|tiff?|png|webp|bmp)$/.test(value);
 };
-
-module.exports = {
-  validate,
-  validateEmail,
-  validatePassword,
-  validatePhone,
-  isValidImage,
-};

@@ -29,7 +29,6 @@ const createOrder = async (req, res) => {
     if (!req.userId)
       return res.status(403).json({ message: "login as a customer first" });
     data.userId = req.userId;
-    console.log(req.userId);
     //==================================================================================
 
     // Product Existance Check ===>
@@ -39,8 +38,6 @@ const createOrder = async (req, res) => {
     });
     if (!availableTshirt)
       return res.status(404).json({ message: "T-Shirt out of stock" });
-    console.log(data.quantity);
-    console.log(availableTshirt.quantity);
 
     if (availableTshirt.quantity < data.quantity)
       return res
@@ -75,12 +72,15 @@ const createOrder = async (req, res) => {
 const getOrdersOfCustomer = async (req, res) => {
   try {
     const userId = req.userId;
+    console.log(userId);
     if (!userId)
       return res
         .status(403)
         .json({ message: "you are not authorised for this action" });
 
-    let orders = await orderModel.find({ userId: userId });
+    let orders = await orderModel
+      .find({ userId: userId })
+      .populate("productId");
     if (orders.length == 0)
       return res.status(404).json({ message: "no orders yet" });
     return res.json({ data: orders });
@@ -102,7 +102,10 @@ const orderDetails = async (req, res) => {
     if (!mongoose.isValidObjectId(orderId))
       return res.status(400).json({ message: "Invalid Order Id" });
 
-    let order = await orderModel.findOne({ _id: orderId, userId: userId });
+    let order = await orderModel
+      .findOne({ _id: orderId, userId: userId })
+      .populate("productId")
+      .populate("userId");
     if (!order)
       return res
         .status(404)
@@ -114,9 +117,14 @@ const orderDetails = async (req, res) => {
   }
 };
 
-// TODO: CANCELLING ORDER ===>
+// TODO: UPDATING ORDER STATUS===>
 const cancleOrder = async (req, res) => {
   try {
+    const status = req.body.status;
+    console.log(status);
+    if (!["placed", "cancled"].includes(status))
+      return res.status(400).json({ message: "invalid content" });
+
     const userId = req.userId;
     if (!userId)
       return res
@@ -127,15 +135,17 @@ const cancleOrder = async (req, res) => {
     if (!mongoose.isValidObjectId(orderId))
       return res.status(400).json({ message: "Invalid Order Id" });
 
-    let order = await orderModel.findOne(
-      { _id: orderId, userId: userId, status: "pending" },
-      { status: "cancled" },
-      { new: true }
-    );
+    let order = await orderModel
+      .findOneAndUpdate(
+        { _id: orderId, userId: userId, status: "pending" },
+        { status: status },
+        { new: true }
+      )
+      .populate("productId");
     if (!order)
-      return res.status(404).json({ message: "can not cancle order" });
+      return res.status(404).json({ message: "can not update status" });
 
-    return res.json({ message: "ordere cancelled successfully", data: order });
+    return res.json({ message: "status updated successfully", data: order });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
