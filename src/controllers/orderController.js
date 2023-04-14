@@ -72,7 +72,6 @@ const createOrder = async (req, res) => {
 const getOrdersOfCustomer = async (req, res) => {
   try {
     const userId = req.userId;
-    console.log(userId);
     if (!userId)
       return res
         .status(403)

@@ -22,6 +22,7 @@ const getTshirt = async (req, res) => {
     if (req.query.productname) {
       filter.productname = { $regex: req.query.productname, $options: "i" };
     }
+    console.log(filter);
     //=========================================================================
     const product = await tShirtModel
       .find(filter)

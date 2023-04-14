@@ -7,7 +7,6 @@ const authentication = async (req, res, next) => {
     if (!token) return res.status(401).json({ message: "Login first" });
 
     token = token.split(" ")[1];
-    console.log(token);
 
     await jwt.verify(token, "secretKey", (error, decodedToken) => {
       if (decodedToken) {
@@ -25,6 +24,7 @@ const vendorAuth = async (req, res, next) => {
     let token = req.headers.authorization;
     if (!token) return res.status(401).json({ message: "Login first" });
     token = token.split(" ")[1];
+    
 
     let wrong = "";
     let ver = "";
@@ -37,7 +37,7 @@ const vendorAuth = async (req, res, next) => {
       }
     });
 
-    if (wrong.length > 2) return res.status(401).json({ error: wrong });
+    if (wrong.length > 2) return res.status(401).json({ message: wrong });
 
     if (ver.length > 2) {
       let shop = await shopModel.findById(ver);

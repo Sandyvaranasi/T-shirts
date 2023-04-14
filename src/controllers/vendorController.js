@@ -42,7 +42,7 @@ const createVendor = async function (req, res) {
     });
 
     if (error) {
-      return res.status(400).json(error.details[0].message);
+      return res.status(400).json({message:error.details[0].message});
     }
     //=====================================================================
 
@@ -95,7 +95,7 @@ const vendorlogin = async function (req, res) {
     });
 
     if (error) {
-      return res.status(400).json(error.details[0].message);
+      return res.status(400).json({message:error.details[0].message});
     }
     //================================================================================
 
@@ -133,6 +133,8 @@ const createTshirt = async function (req, res) {
   try {
     const data = req.body;
     const files = req.files;
+    console.log(data);
+    console.log(files);
 
     // VALIDATIONS ===>
 
@@ -149,7 +151,7 @@ const createTshirt = async function (req, res) {
     });
 
     if (error) {
-      return res.status(400).json(error.details[0].message);
+      return res.status(400).json({message:error.details[0].message});
     }
 
     // AUTHORISATION AND REF ADDING ==>
@@ -206,6 +208,7 @@ const updateTshirt = async (req, res) => {
     const data = req.body;
     const files = req.files;
     const tShirtId = req.params.tShirttId;
+    console.log(data);
 
     if (Object.keys(data).length == 0)
       return res.status(400).json({ message: "give some data to update" });
@@ -217,13 +220,15 @@ const updateTshirt = async (req, res) => {
       sizes: joi.string(),
       colors: joi.string(),
       availability: joi.boolean(),
+      description: joi.string(),
+      quantity: joi.number().min(1)
     });
     const { error, value } = userValidationSchema.validate(data, {
       abortEarly: true,
     });
 
     if (error) {
-      return res.status(400).json(error.details[0].message);
+      return res.status(400).json({message:error.details[0].message});
     }
     //=======================================================================
 
@@ -282,9 +287,6 @@ const updateTshirt = async (req, res) => {
 // TODO: GET SHOP DETAILS
 const getShopDetails = async (req, res) => {
   try {
-    const shopId = req.params.shopId;
-    if (!mongoose.isValidObjectId(shopId))
-      return res.status(400).json({ message: "invalid shopId" });
 
     if (!req.shopId)
       return res

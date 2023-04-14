@@ -20,7 +20,7 @@ router.put(
   midware.vendorAuth,
   vendorController.updateTshirt
 );
-router.get("/shop/:shopId", vendorController.getShopDetails);
+router.get("/shop",midware.vendorAuth, vendorController.getShopDetails);
 
 //* PRODUCT FEATURE ===>
 router.get("/product", tShirtController.getTshirt);
