@@ -4,7 +4,8 @@
   "description": "Creation and updation of orders and customer type respectivly along with giving rewards",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start": "node server/src/index.js",
+    "dev": "npx nodemon server/src/index.js"
   },
   "repository": {
     "type": "git",
