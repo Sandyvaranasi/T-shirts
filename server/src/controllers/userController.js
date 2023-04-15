@@ -28,6 +28,7 @@ const createUser = async function (req, res) {
           /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
         ),
       street: joi.string().required(),
+      landMark: joi.string(),
       city: joi.string().required(),
       pincode: joi.number().required(),
     });
@@ -144,5 +145,79 @@ const getUser = async (req,res)=>{
     res.status(500).send({ message: error.message });
   }
 }
+//=======================================================================================================
 
-module.exports = {createUser, login, getUser};
+//TODO: UPDATE USER
+
+const editProfile = async (req, res) => {
+  try {
+    const data = req.body;
+    if(Object.values(data).length==0) return res.status(400).json({message:'give any field to update'})
+    // Authorization ===>
+    if (!req.userId)
+      return res
+        .status(403)
+        .json({ message: "you are not authorised for this action" });
+    //===================================
+
+    // VALIDATIONS ===>
+
+    const userValidationSchema = joi.object({
+      phone: joi.string().regex(/^[6-9][0-9]{9}$/),
+      email: joi.string().regex(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/),
+      password: joi
+        .string()
+        .min(8)
+        .regex(
+          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
+        ),
+      street: joi.string(),
+      landMark: joi.string(),
+      city: joi.string(),
+      pincode: joi.number(),
+    });
+
+    const { error, value } = userValidationSchema.validate(data, {
+      abortEarly: false,
+    });
+
+    if (error) {
+      return res.status(400).json(error.details[0].message);
+    }
+    //===========================================================================================================================================================================================
+
+    // PASSWORD ENCRYPTION ===>
+    if (data.password) {
+      data.password = await bcrypt.hash(data.password, 12);
+    }
+    //=====================================================
+
+    // UNIQUE CHECK ===>
+    if (data.email || data.phone) {
+      const unique = await userModel.findOne({
+        $or: [{ email: data.email }, { phone: data.phone }],
+      });
+      if (unique) {
+        if (unique.email == data.email)
+          return res
+            .status(400)
+            .json({ status: false, message: "email already in use" });
+        if (unique.phone == data.phone)
+          return res.status(400).json({ message: "phone already in use" });
+      }
+    }
+    //=================================================================================================================
+
+    const editUser = await userModel.findByIdAndUpdate(
+      { _id: req.userId },
+      data,
+      { new: true }
+    );
+    if (!editUser) res.status(404).json({ message: "No such user found" });
+    res.status(200).json({ data: editUser });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = {createUser, login, getUser, editProfile};
