@@ -16,7 +16,7 @@ import AddProduct from "../components/AddProduct";
 import React, { useEffect, useState } from "react";
 import Update from "../components/Update";
 import HomePage from "../components/HomePage";
-import UpdateProfile from '../public/UpdateProfile';
+import UpdateProfile from '../components/UpdateProfile';
 export const authContext = React.createContext({});
 
 console.log(import.meta.env);
