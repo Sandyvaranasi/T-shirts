@@ -19,6 +19,9 @@ import HomePage from '../public/HomePage';
 export const authContext = React.createContext({})
 
 
+console.log(import.meta.env);
+
+
 
 function App() {
   const [userLogin,setUserLogin] = useState(null)

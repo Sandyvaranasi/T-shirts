@@ -3,7 +3,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export const api = axios.create({
-  baseURL : 'https://lovely-spotty-settee.glitch.me/api'
+  // baseURL : 'https://lovely-spotty-settee.glitch.me/api'
+  baseURL : import.meta.env.VITE_BASE_URL
 })
 
 export default function HomePage() {
