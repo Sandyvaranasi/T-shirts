@@ -10,6 +10,7 @@ const orderController = require("../controllers/orderController");
 router.post("/signup", userControllers.createUser);
 router.post("/login", userControllers.login);
 router.get("/user", midware.authentication, userControllers.getUser);
+router.put("/editInfo", midware.authentication, userControllers.editProfile);
 
 //* SHOP FEATURE ===>
 router.post("/shop", vendorController.createVendor);
