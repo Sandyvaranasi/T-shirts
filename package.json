@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sandyvaranasi/foodies.git"
+    "url": "git+https://github.com/Sandyvaranasi/T-shirts.git"
   },
   "author": "Sandeep Tripathi",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Sandyvaranasi/foodies/issues"
+    "url": "https://github.com/Sandyvaranasi/T-shirts/issues"
   },
-  "homepage": "https://github.com/Sandyvaranasi/foodies#readme",
+  "homepage": "https://github.com/Sandyvaranasi/T-shirts#readme",
   "dependencies": {
     "aws-sdk": "^2.1350.0",
     "bcrypt": "^5.1.0",
