@@ -16,10 +16,8 @@ import AddProduct from "../components/AddProduct";
 import React, { useEffect, useState } from "react";
 import Update from "../components/Update";
 import HomePage from "../components/HomePage";
-import UpdateProfile from '../components/UpdateProfile';
+import UpdateProfile from "../components/UpdateProfile";
 export const authContext = React.createContext({});
-
-console.log(import.meta.env);
 
 function App() {
   const [userLogin, setUserLogin] = useState(null);
@@ -63,7 +61,7 @@ function App() {
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/user" element={<User />} />
-          <Route exact path='/editProfile' element={<UpdateProfile/>}/>
+          <Route exact path="/editProfile" element={<UpdateProfile />} />
           <Route exact path="/orders" element={<OrderList />} />
           <Route exact path="/tshirt/:id" element={<Tshirt />} />
           <Route exact path="/order/:id" element={<Order />} />

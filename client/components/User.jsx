@@ -11,14 +11,14 @@ export default function User() {
       navigate("/login");
     }
     api
-      .get("http://localhost:3000/api/user", {
+      .get("/user", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
       .then((res) => setData(res.data.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [data]);
 
   function handleClick() {
     navigate("/editProfile");

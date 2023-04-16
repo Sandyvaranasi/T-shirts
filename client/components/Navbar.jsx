@@ -10,8 +10,6 @@ export default function Navbar() {
     loggedOut();
   }
 
-  console.log(isVendorLoggedIn);
-
   return (
     <nav
       className="navbar bg-dark fixed-top bg-body-tertiary navbar-expand-lg"
