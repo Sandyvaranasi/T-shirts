@@ -6,7 +6,7 @@ export default function Tshirt() {
     const [data, setData] = useState('')
     const [quantity,setQuantity] = useState(1)
     const [order, setOrder] = useState('')
-    const [address, setAddress] = useState('')
+    const [address, setAddress] = useState()
     const params = useParams()
     const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ export default function Tshirt() {
         alert('Order Generated Successfully')
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        alert(err.response.data);
         console.log(err);
         console.log(data);
       }):navigate('/login')

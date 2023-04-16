@@ -12408,7 +12408,7 @@ function ry() {
   w.useEffect(() => {
     ae.get("/product")
       .then((u) => t(u.data.data))
-      .catch((u) => alert(u.response.data.message));
+      .catch((u) => console.log(u));
   }, []);
   function a(u) {
     n(`/tShirt/${u._id}`);
@@ -12439,7 +12439,7 @@ function ry() {
         onClick: s,
         children: "Filter",
       }),
-      e
+      e.length != 0
         ? e.map((u) =>
             E("div", {
               className:
@@ -12471,7 +12471,14 @@ function ry() {
               ],
             })
           )
-        : c("h1", { children: "Loading..." }),
+        : c("div", {
+            className: "spinner-bproduct text-info",
+            role: "status",
+            children: c("span", {
+              className: "visually-hidden",
+              children: "Loading...",
+            }),
+          }),
     ],
   });
 }
@@ -12479,7 +12486,7 @@ function ly() {
   const [e, t] = w.useState(""),
     [n, r] = w.useState(1),
     [l, o] = w.useState(""),
-    [i, s] = w.useState(""),
+    [i, s] = w.useState(),
     a = $s(),
     u = ke();
   l != ""
@@ -12510,7 +12517,7 @@ function ly() {
                 alert("Order Generated Successfully");
             })
             .catch((g) => {
-              alert(g.response.data.message), console.log(g), console.log(e);
+              alert(g.response.data), console.log(g), console.log(e);
             })
         : u("/login");
   }
@@ -12691,7 +12698,7 @@ function oy() {
   return c(Ul, {
     children: t
       ? E("div", {
-          className: " m-5 w-100 bg-white p-4",
+          className: " m-5 w-100 bg-white p-4 rounded-5",
           children: [
             c("h1", {
               className: "fst-italic shadow lg p-2",
@@ -12725,7 +12732,7 @@ function oy() {
             }),
             E("h3", {
               className: "bg-secondary text-light",
-              children: [t.street, " ", t.landmark],
+              children: [t.street, " ", t.landMark],
             }),
             c("label", {
               className: "fs-3 fw-bold fst-italic",
@@ -12747,7 +12754,14 @@ function oy() {
             }),
           ],
         })
-      : c("h1", { children: "Loading..." }),
+      : c("div", {
+          className: "spinner-bproduct text-info",
+          role: "status",
+          children: c("span", {
+            className: "visually-hidden",
+            children: "Loading...",
+          }),
+        }),
   });
 }
 function iy() {
@@ -12826,14 +12840,17 @@ function sy() {
       isVendorLoggedIn: s,
     } = w.useContext(Jt);
   function a() {
-    ae.post("http://localhost:3000/api/vendor", { email: e, password: n })
+    ae.post("/vendor", { email: e, password: n })
       .then((u) => {
-        localStorage.setItem("shopToken", u.data.data.shopToken),
+        console.log(u.data.data),
+          localStorage.setItem("shopToken", u.data.data.shopToken),
           i(u.data.data.shopToken),
           alert("Login Successful !!!"),
           l("/shop");
       })
-      .catch((u) => alert(u.response.data.message));
+      .catch((u) => {
+        console.log(u), alert(u.response.data.message);
+      });
   }
   return (
     w.useEffect(() => {
@@ -12950,7 +12967,7 @@ function ay() {
       }),
       E("h3", {
         className: "bg-secondary text-light",
-        children: [t.street, " ", t.landmark],
+        children: [t.street, " ", t.landMark],
       }),
       c("label", { className: "fs-3 fw-bold fst-italic", children: "City :" }),
       E("h3", {

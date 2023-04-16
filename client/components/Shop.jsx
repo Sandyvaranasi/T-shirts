@@ -40,7 +40,7 @@ export default function Shop() {
       <h3 className="bg-secondary text-light">{data.phone}</h3>
       <label className="fs-3 fw-bold fst-italic">Street :</label>
       <h3 className="bg-secondary text-light">
-        {data.street} {data.landmark}
+        {data.street} {data.landMark}
       </h3>
       <label className="fs-3 fw-bold fst-italic">City :</label>
       <h3 className="bg-secondary text-light">
