@@ -48,7 +48,7 @@ export default function UpdateProfile() {
         navigate("/login");
         alert("Update Successfull, please login again");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.response.data.message));
   }
 
   return (

@@ -17,7 +17,7 @@ export default function User() {
         },
       })
       .then((res) => setData(res.data.data))
-      .catch((err) => alert(err.response.data.message));
+      .catch((err) => console.log(err));
   }, []);
 
   function handleClick() {
@@ -30,35 +30,41 @@ export default function User() {
   }
 
   return (
-    <div className=" m-5 w-100 bg-white p-4">
-      <h1 className="fst-italic shadow lg p-2">User Profile :</h1>
-      <hr />
-      <label className="fs-3 fw-bold fst-italic">User Name :</label>
-      <h3 className="bg-secondary text-light">{data.name}</h3>
-      <label className="fs-3 fw-bold fst-italic">Email Id :</label>
-      <h3 className="bg-secondary text-light">{data.email}</h3>
-      <label className="fs-3 fw-bold fst-italic">Contact No. :</label>
-      <h3 className="bg-secondary text-light">{data.phone}</h3>
-      <label className="fs-3 fw-bold fst-italic">Street :</label>
-      <h3 className="bg-secondary text-light">
-        {data.street} {data.landmark}
-      </h3>
-      <label className="fs-3 fw-bold fst-italic">City :</label>
-      <h3 className="bg-secondary text-light">
-        {data.city}, pin : {data.pincode}
-      </h3>
-      <button
-        className="bg-primary shadow p-2 mt-2 w-25 mx-5"
-        onClick={handleOrders}
-      >
-        My orders
-      </button>
-      <button
-        className="bg-primary shadow p-2 mt-2 w-25 mx-4"
-        onClick={handleClick}
-      >
-        Update Info
-      </button>
-    </div>
+    <>
+      {data ? (
+        <div className=" m-5 w-100 bg-white p-4">
+          <h1 className="fst-italic shadow lg p-2">User Profile :</h1>
+          <hr />
+          <label className="fs-3 fw-bold fst-italic">User Name :</label>
+          <h3 className="bg-secondary text-light">{data.name}</h3>
+          <label className="fs-3 fw-bold fst-italic">Email Id :</label>
+          <h3 className="bg-secondary text-light">{data.email}</h3>
+          <label className="fs-3 fw-bold fst-italic">Contact No. :</label>
+          <h3 className="bg-secondary text-light">{data.phone}</h3>
+          <label className="fs-3 fw-bold fst-italic">Street :</label>
+          <h3 className="bg-secondary text-light">
+            {data.street} {data.landmark}
+          </h3>
+          <label className="fs-3 fw-bold fst-italic">City :</label>
+          <h3 className="bg-secondary text-light">
+            {data.city}, pin : {data.pincode}
+          </h3>
+          <button
+            className="bg-primary shadow p-2 mt-2 w-25 mx-5"
+            onClick={handleOrders}
+          >
+            My orders
+          </button>
+          <button
+            className="bg-primary shadow p-2 mt-2 w-25 mx-4"
+            onClick={handleClick}
+          >
+            Update Info
+          </button>
+        </div>
+      ) : (
+        <h1>Loading...</h1>
+      )}
+    </>
   );
 }

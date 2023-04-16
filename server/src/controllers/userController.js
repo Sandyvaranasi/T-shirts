@@ -38,7 +38,7 @@ const createUser = async function (req, res) {
     });
 
     if (error) {
-      return res.status(400).send(error.details[0].message);
+      return res.status(400).send({ message: error.details[0].message });
     }
     //===========================================================================================================================================================================================
 
@@ -94,7 +94,7 @@ const login = async function (req, res) {
     });
 
     if (error) {
-      return res.status(400).send(error.details[0].message);
+      return res.status(400).send({ message: error.details[0].message });
     }
     //==========================================================================================================================================================================
 
@@ -132,19 +132,21 @@ const login = async function (req, res) {
 };
 
 // TODO: GET USER
-const getUser = async (req,res)=>{
-  try{
-    
+const getUser = async (req, res) => {
+  try {
     // Authorization
-    if(!req.userId) return res.status(403).json({message:'You are unauthororized for this action'})
+    if (!req.userId)
+      return res
+        .status(403)
+        .json({ message: "You are unauthororized for this action" });
     //==============================================================================================
 
-    const user = await userModel.findById(req.userId)
-    return res.json({data:user})
+    const user = await userModel.findById(req.userId);
+    return res.json({ data: user });
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
-}
+};
 //=======================================================================================================
 
 //TODO: UPDATE USER
@@ -152,7 +154,8 @@ const getUser = async (req,res)=>{
 const editProfile = async (req, res) => {
   try {
     const data = req.body;
-    if(Object.values(data).length==0) return res.status(400).json({message:'give any field to update'})
+    if (Object.values(data).length == 0)
+      return res.status(400).json({ message: "give any field to update" });
     // Authorization ===>
     if (!req.userId)
       return res
@@ -182,7 +185,7 @@ const editProfile = async (req, res) => {
     });
 
     if (error) {
-      return res.status(400).json(error.details[0].message);
+      return res.status(400).json({ message: error.details[0].message });
     }
     //===========================================================================================================================================================================================
 
@@ -220,4 +223,4 @@ const editProfile = async (req, res) => {
   }
 };
 
-module.exports = {createUser, login, getUser, editProfile};
+module.exports = { createUser, login, getUser, editProfile };
