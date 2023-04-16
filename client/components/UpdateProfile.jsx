@@ -42,13 +42,16 @@ export default function UpdateProfile() {
         }
       )
       .then((res) => {
-        console.log(res.data.data);
+        console.log(res);
         localStorage.clear();
         loggedOut();
         navigate("/login");
         alert("Update Successfull, please login again");
       })
-      .catch((err) => alert(err.response.data.message));
+      .catch((err) => {
+        alert(err.response.data.message);
+        console.log(err);
+      });
   }
 
   return (

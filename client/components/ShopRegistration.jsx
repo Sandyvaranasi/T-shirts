@@ -33,7 +33,10 @@ export default function ShopRegistration() {
         alert("registration Successful !!!");
         navigate("/vendorLogin");
       })
-      .catch((err) => alert(err.response.data.message));
+      .catch((err) => {
+        alert(err.response.data.message);
+        console.log(err);
+      });
   }
 
   useEffect(() => {

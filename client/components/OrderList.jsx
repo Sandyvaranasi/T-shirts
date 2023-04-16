@@ -13,8 +13,12 @@ export default function OrderList() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then((res) => setData(res.data.data))
+      .then((res) => {
+        setData(res.data.data);
+        console.log(res);
+      })
       .catch((err) => {
+        console.log(err);
         navigate("/home");
         alert(err.response.data.message);
       });
@@ -22,7 +26,7 @@ export default function OrderList() {
 
   return data.length >= 1 ? (
     <div className="row mt-5 ms-5">
-      <h1 className="fst-italic bg-pink p-4">Your Orders :-</h1>
+      <h1 className="fst-italic bg-white p-4 w-75 rounded-5">Your Orders :-</h1>
       {data.map((order) => (
         <div className="col-4 p-2 mx-1 my-1 mt-2 card shadow rounded bg-white">
           <div className="row p-3 my-2">

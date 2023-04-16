@@ -30,49 +30,48 @@ function submitHandler(){
     }
   })
   .then(res=>{
-    console.log(formData)
-    console.log(res.data.data);
+    console.log(res);
     alert('T-Shirt added Successfully')
     navigate('/shop')
   })
-  .catch(err=>{ console.log(formData);
+  .catch(err=>{ console.log(err);
     alert(err.response.data.message)})
 }
 
   return (
-    <div className='col mt-5 bg-white'>
-    <h1>Add New Product :-</h1>
+    <div className='col mt-5 bg-white shadow lg p-3 rounded-5'>
+    <h1>Add New Product </h1>
     <hr/>
     <div className="mb-3">
-<label htmlFor="exampleFormControlInput1" className="form-label">Product name</label>
-<input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Product name here..." onChange={e=>setName(e.target.value)}/>
+<label htmlFor="exampleFormControlInput1" className="form-label shadow lg">Product name</label>
+<input type="text" className="form-control shadow lg" id="exampleFormControlInput1" placeholder="Product name here..." onChange={e=>setName(e.target.value)}/>
 </div>
 <div className="mb-3">
-<label htmlFor="exampleFormControlInput1" className="form-label">Price</label>
-<input type="number" className="form-control" id="exampleFormControlInput1" placeholder="Cost per piece here..." onChange={e=>setPrice(e.target.value)}/>
+<label htmlFor="exampleFormControlInput1" className="form-label shadow lg">Price</label>
+<input type="number" className="form-control shadow lg" id="exampleFormControlInput1" placeholder="Cost per piece here..." onChange={e=>setPrice(e.target.value)}/>
 </div>
 <div className="mb-3">
-<label htmlFor="exampleFormControlInput1" className="form-label">Description</label>
-<input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Quick description of product..." onChange={e=>setDescription(e.target.value)}/>
+<label htmlFor="exampleFormControlInput1" className="form-label shadow lg">Description</label>
+<input type="text" className="form-control shadow lg" id="exampleFormControlInput1" placeholder="Quick description of product..." onChange={e=>setDescription(e.target.value)}/>
 </div>
 <div className="mb-3">
-<label htmlFor="exampleFormControlInput1" className="form-label">Upload Product Image</label>
-<input type="file" className="form-control" id="exampleFormControlInput1" onChange={e=>setProductImage(e.target.files[0])}/>
+<label htmlFor="exampleFormControlInput1" className="form-label shadow lg">Upload Product Image</label>
+<input type="file" className="form-control shadow lg" id="exampleFormControlInput1" onChange={e=>setProductImage(e.target.files[0])}/>
 </div>
 <div className="mb-3">
-<label htmlFor="exampleFormControlInput1" className="form-label">Colors</label>
-<input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Fill colors if any..." onChange={e=>setColors(e.target.value)}/>
+<label htmlFor="exampleFormControlInput1" className="form-label shadow lg">Colors</label>
+<input type="text" className="form-control shadow lg" id="exampleFormControlInput1" placeholder="Fill colors if any..." onChange={e=>setColors(e.target.value)}/>
 </div>
 <div className="mb-3">
-<label htmlFor="exampleFormControlInput1" className="form-label">Size</label>
-<input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Only Small,Medium and Large allowed..." onChange={e=>setSizes(e.target.value)}/>
+<label htmlFor="exampleFormControlInput1" className="form-label shadow lg">Size</label>
+<input type="text" className="form-control shadow lg" id="exampleFormControlInput1" placeholder="Only Small,Medium and Large allowed..." onChange={e=>setSizes(e.target.value)}/>
 </div>
 <div className="mb-3">
-<label htmlFor="exampleFormControlInput1" className="form-label">quantity</label>
-<input type="number" className="form-control" id="exampleFormControlInput1" placeholder="Your quantity here..." onChange={e=>setQuantity(e.target.value)}/>
+<label htmlFor="exampleFormControlInput1" className="form-label shadow lg">quantity</label>
+<input type="number" className="form-control shadow lg" id="exampleFormControlInput1" placeholder="Your quantity here..." onChange={e=>setQuantity(e.target.value)}/>
 </div> 
   <div className="form-group">
-    <button className='bg-success mt-2 w-100' onClick={submitHandler} >Add T-Shirt</button>
+    <button className='bg-success mt-2 w-100 shadow lg' onClick={submitHandler} >Add T-Shirt</button>
     <Link to='/shop'>Do not want to add?? Return to profile Now!!!</Link>
   </div>
   </div>

@@ -73,10 +73,9 @@ export default function Order() {
       )
       .then((res) => {
         setData(res.data.data);
-        // setStatus('')
-        // alert(res.data.message)
+        console.log(res);
       })
-      .catch((err) => console.log(err.response.data));
+      .catch((err) => console.log(err));
   }
 
   useEffect(() => {
@@ -86,8 +85,11 @@ export default function Order() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then((res) => setData(res.data.data))
-      .catch((err) => console.log(err.response.data));
+      .then((res) => {
+        setData(res.data.data);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   return (

@@ -12,7 +12,7 @@ export default function Signup() {
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [pincode, setPincode] = useState("");
-  const [landmark, setLandmark] = useState("");
+  const [landMark, setLandMark] = useState("");
   const [data, setData] = useState("");
   const navigate = useNavigate();
 
@@ -26,10 +26,16 @@ export default function Signup() {
         street,
         city,
         pincode,
-        landmark,
+        landMark,
       })
-      .then((res) => setData(res.data.data))
-      .catch((err) => alert(err.response.data.message));
+      .then((res) => {
+        alert("registration Successful !!!");
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err.response.data.message);
+      });
   }
   if (data != "") {
     navigate("/login");
@@ -113,14 +119,14 @@ export default function Signup() {
       </div>
       <div className="mb-3">
         <label for="exampleFormControlInput1" className="form-label">
-          Landmark
+          LandMark
         </label>
         <input
           type="text"
           className="form-control"
           id="exampleFormControlInput1"
-          placeholder="Fill Landmark if any..."
-          onChange={(e) => setLandmark(e.target.value)}
+          placeholder="Fill LandMark if any..."
+          onChange={(e) => setLandMark(e.target.value)}
         />
       </div>
       <div className="mb-3">

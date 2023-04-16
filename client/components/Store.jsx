@@ -16,7 +16,10 @@ export default function Store() {
           params: { productname, sizes },
         })
         .then((res) => setData(res.data.data))
-        .catch((err) => alert(err.response.data.message));
+        .catch((err) => {
+          alert(err.response.data.message);
+          console.log(err);
+        });
     }
   }
 

@@ -14,7 +14,7 @@ export default function Vendor() {
     api
       .post("/vendor", { email, password })
       .then((res) => {
-        console.log(res.data.data);
+        console.log(res);
         localStorage.setItem("shopToken", res.data.data.shopToken);
         vendorLoggedIn(res.data.data.shopToken);
         alert("Login Successful !!!");

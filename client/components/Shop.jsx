@@ -13,7 +13,10 @@ export default function Shop() {
           Authorization: `Bearer ${localStorage.getItem("shopToken")}`,
         },
       })
-      .then((res) => setData(res.data.data))
+      .then((res) => {
+        setData(res.data.data);
+        console.log(res);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -27,33 +30,35 @@ export default function Shop() {
   }
 
   return (
-    <div className=" m-5 w-100 bg-white p-4">
+    <div className=" m-5 w-100 bg-white p-4 shadow lg rounded-5">
       <h1 className="fst-italic shadow lg p-2">Shop Profile </h1>
       <hr />
-      <label className="fs-3 fw-bold fst-italic">Owner's Name :</label>
-      <h3 className="bg-secondary text-light">{data.ownername}</h3>
-      <label className="fs-3 fw-bold fst-italic">Shop's Name :</label>
-      <h3 className="bg-secondary text-light">{data.shop}</h3>
-      <label className="fs-3 fw-bold fst-italic">Email Id :</label>
-      <h3 className="bg-secondary text-light">{data.email}</h3>
-      <label className="fs-3 fw-bold fst-italic">Contact No. :</label>
-      <h3 className="bg-secondary text-light">{data.phone}</h3>
-      <label className="fs-3 fw-bold fst-italic">Street :</label>
-      <h3 className="bg-secondary text-light">
+      <label className="fs-3 fw-bold fst-italic shadow lg">
+        Owner's Name :
+      </label>
+      <h3 className="bg-secondary text-light shadow lg">{data.ownername}</h3>
+      <label className="fs-3 fw-bold fst-italic shadow lg">Shop's Name :</label>
+      <h3 className="bg-secondary text-light shadow lg">{data.shop}</h3>
+      <label className="fs-3 fw-bold fst-italic shadow lg">Email Id :</label>
+      <h3 className="bg-secondary text-light shadow lg">{data.email}</h3>
+      <label className="fs-3 fw-bold fst-italic shadow lg">Contact No. :</label>
+      <h3 className="bg-secondary text-light shadow lg">{data.phone}</h3>
+      <label className="fs-3 fw-bold fst-italic shadow lg">Street :</label>
+      <h3 className="bg-secondary text-light shadow lg">
         {data.street} {data.landMark}
       </h3>
-      <label className="fs-3 fw-bold fst-italic">City :</label>
-      <h3 className="bg-secondary text-light">
+      <label className="fs-3 fw-bold fst-italic shadow lg">City :</label>
+      <h3 className="bg-secondary text-light shadow lg">
         {data.city}, pin : {data.pincode}
       </h3>
       <button
-        className="bg-primary shadow p-2 mt-2  w-25 mx-5"
+        className="bg-primary shadow p-2 mt-2  w-25 mx-5 shadow lg"
         onClick={handleOrders}
       >
         My products
       </button>
       <button
-        className="bg-primary shadow p-2 mt-2  w-25 mx-5"
+        className="bg-primary shadow p-2 mt-2  w-25 mx-5 shadow lg"
         onClick={handleClick}
       >
         Add product
