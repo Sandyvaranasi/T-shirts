@@ -32,7 +32,7 @@ export default function User() {
   return (
     <>
       {data ? (
-        <div className=" m-5 w-100 bg-white p-4">
+        <div className=" m-5 w-100 bg-white p-4 rounded-5">
           <h1 className="fst-italic shadow lg p-2">User Profile :</h1>
           <hr />
           <label className="fs-3 fw-bold fst-italic">User Name :</label>
@@ -63,7 +63,9 @@ export default function User() {
           </button>
         </div>
       ) : (
-        <h1>Loading...</h1>
+        <div className="spinner-bproduct text-info" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </div>
       )}
     </>
   );
