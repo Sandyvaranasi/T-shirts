@@ -14,8 +14,10 @@ export default function OrderList() {
         },
       })
       .then((res) => setData(res.data.data))
-      .catch((err) => { navigate('/home')
-        alert(err.response.data.message)});
+      .catch((err) => {
+        navigate("/home");
+        alert(err.response.data.message);
+      });
   }, []);
 
   return data.length >= 1 ? (
