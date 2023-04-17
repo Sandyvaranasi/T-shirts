@@ -94,16 +94,16 @@ export default function Order() {
 
   return (
     <>
-      <div className="row mt-5 bg-white p-4">
+      <div className="row mt-5 text-white">
         {data.userId ? (
           <div className="col">
             <img
-              className="shadow lg p-3 mb-5 rounded img-fluid "
+              className="p-3 mb-5 rounded-5 img-fluid "
               src={data.productId.productImage}
             />
             <div className="row">
-              <h5 className="fw-bold">Total Quantity :-</h5>
-              <h3>{data.quantity}</h3>
+              <h5 className="fw-bold">Total Quantity :</h5>
+              <h3 className="bg-dark">{data.quantity}</h3>
             </div>
             {data.status == "pending" ? (
               <div className="row">
@@ -152,18 +152,18 @@ export default function Order() {
         )}
         {data.userId ? (
           <div className="col me-9">
-            <h1 className="shadow lg p-3 mb-2 bg-body-tertiary rounded fw-bold fst-italic">
+            <h1 className="shadow lg p-3 mb-2 fw-bold fst-italic">
               {data.productId.productname}
             </h1>
-            <h2 className="shadow lg mb-3 rounded fw-bold fst-italic">
+            <h2 className="shadow lg mb-3 fw-bold fst-italic">
               ₹ {data.totalPrice}
             </h2>
-            <h3 className="shadow lg mb-3 rounded text-danger fst-italic">
+            <h3 className="shadow lg mb-3 text-danger fst-italic">
               Status :- {data.status}
             </h3>
             <hr />
-            <h3 className="shadow lg  mb-3 rounded fw-bold">
-              Shipping Details :-
+            <h3 className="shadow lg  mb-3 fw-bold">
+              Shipping Details :
             </h3>
             <h5 className="fst-italic">
               • will be delivered in 7 working days <br />• Shipping address :-{" "}

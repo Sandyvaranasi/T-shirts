@@ -26,13 +26,15 @@ export default function OrderList() {
 
   return data.length >= 1 ? (
     <div className="row mt-5 ms-5">
-      <h1 className="fst-italic bg-white p-4 w-75 rounded-5">Your Orders :-</h1>
+      <h1 className="fst-italic text-white">Your Orders :</h1>
       {data.map((order) => (
-        <div className="col-4 p-2 mx-1 my-1 mt-2 card shadow rounded bg-white">
+        <div className="col-4 p-2 mx-1 my-1 mt-2 card shadow rounded-3 bg-dark text-white">
           <div className="row p-3 my-2">
-            <h5 className="card-header text-danger">{order.status}</h5>
+            {order.status=='pending'&&<h5 className="card-header text-warning">{order.status}</h5>}
+            {order.status=='placed'&&<h5 className="card-header text-success">{order.status}</h5>}
+            {order.status=='cancled'&&<h5 className="card-header text-danger">{order.status}</h5>}
             <div className="card-body">
-              <h5 className="card-title">{order.productId.productname}</h5>
+              <h5 className="card-title fs-4">{order.productId.productname}</h5>
               <p className="card-text">Order Date : {order.createdAt}</p>
               <button
                 className="btn btn-primary shadow lg"

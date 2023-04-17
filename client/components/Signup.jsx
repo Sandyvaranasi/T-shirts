@@ -52,11 +52,12 @@ export default function Signup() {
   }, []);
 
   return (
-    <div className="col mt-5 bg-white p-3 rounded-5">
+    <div className="col mt-5 text-white">
+      <p>Customer Registration Page</p>
       <h1>Signup here </h1>
       <hr />
       <div className="mb-3">
-        <label for="exampleFormControlInput1" className="form-label">
+        <label for="exampleFormControlInput1" className="form-label fs-4">
           Name
         </label>
         <input
@@ -68,7 +69,7 @@ export default function Signup() {
         />
       </div>
       <div className="mb-3">
-        <label for="exampleFormControlInput1" className="form-label">
+        <label for="exampleFormControlInput1" className="form-label fs-4">
           Phone No.
         </label>
         <input
@@ -80,7 +81,7 @@ export default function Signup() {
         />
       </div>
       <div className="mb-3">
-        <label for="exampleFormControlInput1" className="form-label">
+        <label for="exampleFormControlInput1" className="form-label fs-4">
           Email address
         </label>
         <input
@@ -91,7 +92,7 @@ export default function Signup() {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <label for="inputPassword5" className="form-label">
+      <label for="inputPassword5" className="form-label fs-4">
         Password
       </label>
       <input
@@ -101,12 +102,12 @@ export default function Signup() {
         aria-labelledby="passwordHelpBlock"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <div id="passwordHelpBlock" className="form-text">
+      <div id="passwordHelpBlock" className="form-text bg-dark text-white">
         Your password must be 8-15 characters long, contain letters, special
         characters and numbers, and must not contain spaces, or emoji.
       </div>
       <div className="mb-3">
-        <label for="exampleFormControlInput1" className="form-label">
+        <label for="exampleFormControlInput1" className="form-label fs-4">
           Street
         </label>
         <input
@@ -118,7 +119,7 @@ export default function Signup() {
         />
       </div>
       <div className="mb-3">
-        <label for="exampleFormControlInput1" className="form-label">
+        <label for="exampleFormControlInput1" className="form-label fs-4">
           LandMark
         </label>
         <input
@@ -130,7 +131,7 @@ export default function Signup() {
         />
       </div>
       <div className="mb-3">
-        <label for="exampleFormControlInput1" className="form-label">
+        <label for="exampleFormControlInput1" className="form-label fs-4">
           City
         </label>
         <input
@@ -142,7 +143,7 @@ export default function Signup() {
         />
       </div>
       <div className="mb-3">
-        <label for="exampleFormControlInput1" className="form-label">
+        <label for="exampleFormControlInput1" className="form-label fs-4">
           Pincode
         </label>
         <input

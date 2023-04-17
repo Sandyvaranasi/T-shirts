@@ -56,14 +56,14 @@ export default function Tshirt() {
 
   return (
     <>
-      <div className="row mt-5 bg-white p-4 ">
+      <div className="row mt-5 text-white ">
         <div className="col">
           <img
-            className="shadow lg p-3 mb-5 rounded img-fluid "
+            className="shadow lg p-3 mb-5 rounded-5 img-fluid "
             src={data.productImage}
           />
           <div className="row">
-            <h5 className="fw-bold">Select Quantity :-</h5>
+            <h5 className="fw-bold">Select Quantity :</h5>
             <select onClick={(e) => setQuantity(e.target.value)}>
               <option>1</option>
               <option>2</option>
@@ -83,7 +83,7 @@ export default function Tshirt() {
             for="exampleFormControlInput1"
             className="form-label fs-3 shadow p-1"
           >
-            Address :-
+            Address :
           </label>
           <input
             type="textarea"
@@ -99,7 +99,7 @@ export default function Tshirt() {
           </div>
         </div>
         <div className="col me-9">
-          <h1 className="shadow lg p-3 mb-2 bg-body-tertiary rounded fw-bold fst-italic">
+          <h1 className="shadow lg p-3 mb-2 fw-bold fst-italic">
             {data.productname}
           </h1>
           <h2 className="shadow lg mb-3 rounded fw-bold fst-italic">

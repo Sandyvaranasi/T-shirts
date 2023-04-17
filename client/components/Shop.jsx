@@ -30,7 +30,7 @@ export default function Shop() {
   }
 
   return (
-    <div className=" m-5 w-100 bg-white p-4 shadow lg rounded-5">
+    <div className=" m-5 w-100 text-white p-4 shadow lg">
       <h1 className="fst-italic shadow lg p-2">Shop Profile </h1>
       <hr />
       <label className="fs-3 fw-bold fst-italic shadow lg">

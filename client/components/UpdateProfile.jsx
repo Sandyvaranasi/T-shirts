@@ -55,11 +55,11 @@ export default function UpdateProfile() {
   }
 
   return (
-    <div className="col mt-5 bg-white p-3 rounded-5">
+    <div className="col mt-5 text-white">
       <h1>Update Form </h1>
       <hr />
       <div className="mb-3">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
+        <label htmlFor="exampleFormControlInput1" className="form-label fs-4">
           Phone No.
         </label>
         <input
@@ -71,7 +71,7 @@ export default function UpdateProfile() {
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
+        <label htmlFor="exampleFormControlInput1" className="form-label fs-4">
           Email address
         </label>
         <input
@@ -82,7 +82,7 @@ export default function UpdateProfile() {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <label htmlFor="inputPassword5" className="form-label">
+      <label htmlFor="inputPassword5" className="form-label fs-4">
         Password
       </label>
       <input
@@ -92,12 +92,12 @@ export default function UpdateProfile() {
         aria-labelledby="passwordHelpBlock"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <div id="passwordHelpBlock" className="form-text">
+      <div id="passwordHelpBlock" className="form-text bg-dark text-white">
         Your password must be 8-15 characters long, contain letters, special
         characters and numbers, and must not contain spaces, or emoji.
       </div>
       <div className="mb-3">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
+        <label htmlFor="exampleFormControlInput1" className="form-label fs-4">
           Street
         </label>
         <input
@@ -109,7 +109,7 @@ export default function UpdateProfile() {
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
+        <label htmlFor="exampleFormControlInput1" className="form-label fs-4">
           Landmark
         </label>
         <input
@@ -121,7 +121,7 @@ export default function UpdateProfile() {
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
+        <label htmlFor="exampleFormControlInput1" className="form-label fs-4">
           City
         </label>
         <input
@@ -133,7 +133,7 @@ export default function UpdateProfile() {
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
+        <label htmlFor="exampleFormControlInput1" className="form-label fs-4">
           Pincode
         </label>
         <input

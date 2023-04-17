@@ -33,12 +33,12 @@ export default function Login() {
   }, []);
 
   return (
-    <div className="col bg-white p-3 rounded-5">
+    <div className="col text-white">
       <p>Customer Sign-in Page</p>
       <h1>LogIn here </h1>
       <hr />
       <div className="mb-3">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
+        <label htmlFor="exampleFormControlInput1" className="form-label fs-3">
           Email address
         </label>
         <input
@@ -49,7 +49,7 @@ export default function Login() {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <label htmlFor="inputPassword5" className="form-label">
+      <label htmlFor="inputPassword5" className="form-label fs-3">
         Password
       </label>
       <input
@@ -59,7 +59,7 @@ export default function Login() {
         aria-labelledby="passwordHelpBlock"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <div id="passwordHelpBlock" className="form-text">
+      <div id="passwordHelpBlock" className="form-text bg-dark text-white">
         Your password must be 8-15 characters long, contain letters, special
         characters and numbers, and must not contain spaces, or emoji.
       </div>

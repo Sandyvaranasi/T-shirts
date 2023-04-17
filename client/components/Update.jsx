@@ -41,11 +41,11 @@ export default function Update() {
   }
 
   return (
-    <div className="col mt-5 bg-white p-4">
-      <h1>Update Product Data:-</h1>
+    <div className="col mt-5 text-white">
+      <h1>Update Product Data:</h1>
       <hr />
       <div className="mb-3">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
+        <label htmlFor="exampleFormControlInput1" className="form-label fs-4">
           Price
         </label>
         <input
@@ -57,7 +57,7 @@ export default function Update() {
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
+        <label htmlFor="exampleFormControlInput1" className="form-label fs-4">
           Description
         </label>
         <input
@@ -69,7 +69,7 @@ export default function Update() {
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
+        <label htmlFor="exampleFormControlInput1" className="form-label fs-4">
           Upload Product Image
         </label>
         <input
@@ -80,7 +80,7 @@ export default function Update() {
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
+        <label htmlFor="exampleFormControlInput1" className="form-label fs-4">
           Colors
         </label>
         <input
@@ -92,7 +92,7 @@ export default function Update() {
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
+        <label htmlFor="exampleFormControlInput1" className="form-label fs-4">
           Size
         </label>
         <input
@@ -104,7 +104,7 @@ export default function Update() {
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
+        <label htmlFor="exampleFormControlInput1" className="form-label fs-4">
           Quantity
         </label>
         <input
@@ -116,7 +116,7 @@ export default function Update() {
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
+        <label htmlFor="exampleFormControlInput1" className="form-label fs-4">
           Available
         </label>
         <button

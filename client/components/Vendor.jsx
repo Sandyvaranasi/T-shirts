@@ -37,12 +37,12 @@ export default function Vendor() {
   }, []);
 
   return (
-    <div className="col bg-white p-3 rounded-5">
+    <div className="col text-white">
       <p>Vendor Sign-in Page</p>
       <h1>LogIn here </h1>
       <hr />
       <div className="mb-3">
-        <label htmlFor="exampleFormControlInput1" className="form-label">
+        <label htmlFor="exampleFormControlInput1" className="form-label fs-3">
           Email address
         </label>
         <input
@@ -53,7 +53,7 @@ export default function Vendor() {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <label htmlFor="inputPassword5" className="form-label">
+      <label htmlFor="inputPassword5" className="form-label fs-3">
         Password
       </label>
       <input
@@ -63,7 +63,7 @@ export default function Vendor() {
         aria-labelledby="passwordHelpBlock"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <div id="passwordHelpBlock" className="form-text">
+      <div id="passwordHelpBlock" className="form-text text-white bg-dark">
         Your password must be 8-15 characters long, contain letters, special
         characters and numbers, and must not contain spaces, or emoji.
       </div>
