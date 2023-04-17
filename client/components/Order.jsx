@@ -49,7 +49,7 @@ export default function Order() {
           "Please do note it down for further references " +
             response.razorpay_payment_id
         );
-        alert("Payment Successfully");
+        alert("Payment Successfull");
         setStatus("placed");
       },
       prefill: {
