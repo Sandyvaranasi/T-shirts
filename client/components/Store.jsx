@@ -49,7 +49,7 @@ export default function Store() {
       </select>
       <input
         type="text"
-        className="form-control  bg-dark text-light"
+        className="form-control  bg-lirght"
         id="exampleFormControlInput1"
         placeholder="Filter by Name "
         onChange={(e) => setName(e.target.value)}
@@ -59,7 +59,10 @@ export default function Store() {
       </button>
       {data.length != 0 ? (
         data.map((tShirt) => (
-          <div className="col-2 shadow lg p-3 my-2 mx-2 border  rounded-3 text-white">
+          <div
+            className="col-2 p-3 my-2 mx-2 bg-dark rounded-3 text-white"
+            style={{ boxShadow: "3px 3px 6px rgb(96,96,96)" }}
+          >
             <img
               src={tShirt.productImage}
               className="card-img-top mw-100 rounded-3"

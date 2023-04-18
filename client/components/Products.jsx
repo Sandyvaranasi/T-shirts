@@ -27,7 +27,7 @@ export default function Products() {
     <div className="row mt-5 ms-5">
       <h1 className="fst-italic text-white">Your Products : </h1>
       {data.map((product) => (
-        <div className="col-4 p-2 mx-1 my-1 mt-2 card shadow text-white bg-dark">
+        <div className="col-4 p-2 mx-1 my-1 mt-2 card text-white bg-dark">
           <div className="row p-3 my-2">
             <h5 className="card-header text-danger">
               In Stock {product.quantity}
