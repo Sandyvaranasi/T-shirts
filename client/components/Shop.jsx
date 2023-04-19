@@ -7,6 +7,10 @@ export default function Shop() {
   const [data, setData] = useState("");
 
   useEffect(() => {
+    if (!localStorage.getItem("shopToken")) {
+      alert("please sign in first");
+      navigate("/vendorLogin");
+    } else
     api
       .get("/shop", {
         headers: {

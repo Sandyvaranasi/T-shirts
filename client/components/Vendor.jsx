@@ -28,7 +28,7 @@ export default function Vendor() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      alert("already logged in");
+      alert("customer already logged in");
       navigate("/user");
     } else if (isVendorLoggedIn) {
       alert("already logged in");

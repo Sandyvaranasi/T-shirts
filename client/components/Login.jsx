@@ -19,7 +19,10 @@ export default function Login() {
         alert("Login Successful !!!");
         navigate("/user");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        alert(err.response.data.message);
+        console.log(err);
+      });
   }
 
   useEffect(() => {
@@ -27,7 +30,7 @@ export default function Login() {
       alert("already logged in");
       navigate("/user");
     } else if (isVendorLoggedIn) {
-      alert("already logged in");
+      alert("vendor already logged in");
       navigate("/shop");
     }
   }, []);

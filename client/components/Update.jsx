@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { api } from "./HomePage";
 
@@ -13,6 +13,13 @@ export default function Update() {
   const [colors, setColors] = useState(null);
   const [availability, setAvailability] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("shopToken")) {
+      alert("please sign in first");
+      navigate("/vendorLogin");
+    }
+  }, []);
 
   function submitHandler() {
     const formData = new FormData();

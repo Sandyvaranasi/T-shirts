@@ -7,20 +7,24 @@ export default function Products() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    api
-      .get("/tShirtByShop", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("shopToken")}`,
-        },
-      })
-      .then((res) => {
-        setData(res.data.data);
-        console.log(res);
-      })
-      .catch((err) => {
-        alert(err.response.data.message);
-        console.log(err);
-      });
+    if (!localStorage.getItem("shopToken")) {
+      alert("please sign in first");
+      navigate("/vendorLogin");
+    } else
+      api
+        .get("/tShirtByShop", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("shopToken")}`,
+          },
+        })
+        .then((res) => {
+          setData(res.data.data);
+          console.log(res);
+        })
+        .catch((err) => {
+          alert(err.response.data.message);
+          console.log(err);
+        });
   }, []);
 
   return data.length >= 1 ? (

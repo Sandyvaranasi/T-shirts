@@ -19,7 +19,7 @@ export default function OrderList() {
       })
       .catch((err) => {
         console.log(err);
-        navigate("/home");
+        navigate("/login");
         alert(err.response.data.message);
       });
   }, []);

@@ -8,6 +8,7 @@ export default function User() {
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
+      alert("login first");
       navigate("/login");
     }
     api

@@ -54,7 +54,7 @@ const createUser = async function (req, res) {
       if (unique.email == data.email)
         return res
           .status(400)
-          .send({ status: false, message: "email already in use" });
+          .send({ message: "email already in use" });
       if (unique.phone == data.phone)
         return res.status(400).send({ message: "phone already in use" });
     }
@@ -63,7 +63,7 @@ const createUser = async function (req, res) {
     const createdUser = await userModel.create(data);
     res
       .status(201)
-      .send({ status: true, message: "success", data: createdUser });
+      .send({ message: "success", data: createdUser });
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
@@ -204,7 +204,7 @@ const editProfile = async (req, res) => {
         if (unique.email == data.email)
           return res
             .status(400)
-            .json({ status: false, message: "email already in use" });
+            .json({ message: "email already in use" });
         if (unique.phone == data.phone)
           return res.status(400).json({ message: "phone already in use" });
       }

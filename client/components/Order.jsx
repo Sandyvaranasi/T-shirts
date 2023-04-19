@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { api } from "./HomePage";
 
 export default function Order() {
   const [data, setData] = useState("");
   const params = useParams();
   const [status, setStatus] = useState("");
+  const navigate = useNavigate()
 
   //TODO: PAyment ==========================================================
   const loadScript = (src) => {
@@ -79,6 +80,10 @@ export default function Order() {
   }
 
   useEffect(() => {
+    if(!localStorage.getItem('token')){
+      alert('login first')
+      navigate('/login')
+    }else    
     api
       .get(`/order/${params.id}`, {
         headers: {
