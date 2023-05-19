@@ -1,4 +1,7 @@
 # T-Shirts
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://cdn.shopify.com/s/files/1/0090/9236/6436/articles/Best_Shopify_T-shirt_Stores_For_Your_Inspiration_in_2021.png?v=1621964186" width="200" alt="T-Shirts" /></a>
+</p>
 ## FSOC project
 ### E-Commerse and ERP
 
@@ -14,46 +17,14 @@ The backend part contains multiple models and controllers. It is wrritten in Jav
 #### The User MOdel ===>
 
 ```javascript
-{
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  phone: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  street: {
-    type: String,
-    required: true,
-    trim: true,
-  },
+  name: { String,required},
+  email: { String, required, unique},
+  password: {String, required},
+  phone: {String, required},
+  street: {String, required},
   landMark: String,
-  city: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  pincode: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-},
-{ timestamps: true }
+  city: {String, required},
+  pincode: {String, required}
 ```
 
   
@@ -61,134 +32,44 @@ The user model is a common model in almost every project. In this project the cu
 
 #### The Shop Model ===>
 ```javascript
-{
-    ownername: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    shop: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-    },
-    password: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    phone: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-    },
-    street: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    landmark: String,
-    city: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    pincode: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-  },
-  { timestamps: true }
+  ownername: { String,required},
+  shop: { String,required},
+  email: { String, required, unique},
+  password: {String, required},
+  phone: {String, required},
+  street: {String, required},
+  landMark: String,
+  city: {String, required},
+  pincode: {String, required}
   ```
   
 After the addition of user the second important model is a shop model because this is an ERP website there will be multiple shops so the model should also be specific. The shop model consist or owner's name, shop name, email, number address and a strong password. The user registered in this schema will be considered as a vendor.
 
 #### The T-shirt Model ===>
 ```javascript
- {
-    shopId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "shop",
-      require: true,
-    },
-    productname: {
-      type: String,
-      require: true,
-    },
-    description: {
-      type: String,
-      require: true,
-    },
-    baseprice: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    quantity: {
-      type: Number,
-      require: true,
-    },
-    sizes: {
-      type: [String],
-      enum: ["Small", "Medium", "Large"],
-      default: ["Medium"],
-    },
-    colors: [String],
-    productImage: {
-      type: String,
-      required: true,
-    },
-    availability: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  { timestamps: true }
+ shopId: { ObjectId,required},
+   productname: { String,required},
+  description: { String,required},
+  baseprice: { String, required},
+  quantity: {Number, required},
+  productImage: {String, required},
+  sizes: {[String],enum: ["Small", "Medium", "Large"]},
+  colors: [String],
+  availability: { Boolean, default: true},
   ```
   
 Since thios is an e-comm website , specially designed for selling and buying t-shirts. There should be some criteria under which t-shirts are accepted. Here comes the concept of t-shirt model. This schema dfines the information about the t-shirts for convenience of customer as well as vendor. It consist a name(could be brand), brief description, quantity, sizes, colors and availability.
 
 #### The Order Model ===>
 ```javascript
- {
-    userId: {
-      type: ObjectId,
-      ref: "user",
-      required: true,
-    },
-    productId: {
-      type: ObjectId,
-      ref: "tshirt",
-      required: true,
-    },
-    quantity: {
-      type: Number,
-      required: true,
-      minLength: 1,
-    },
-    totalPrice: {
-      type: Number,
-      required: true,
-    },
-    status: {
-      type: String,
-      default: "pending",
-      enum: ["pending", "placed", "cancled"],
-    },
-    address:{
-      type: String,
-      required: true
-    }
-  },
-  { timestamps: true }
+  userId: { ObjectId,required},
+  productId: { ObjectId,required},
+   productname: { String,required},
+  description: { String,required},
+  totalPrice: { Number, required},
+  quantity: {Number, required,min:1},
+    status: { String,default: "pending",enum: ["pending", "placed", "cancled"] },
+    address:{ String,required}
   ```
   
 The last but not the least is Order model. It will be holding all the order of any specific user for the record. It consist the keys like productId, quantity, total price, user Id, and status of order.
